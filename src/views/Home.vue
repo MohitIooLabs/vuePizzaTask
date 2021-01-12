@@ -4,8 +4,9 @@
       <!-- Pizza Tracker Table -->
       <v-card>
         <v-card-title>
-          pizza tracker
+          Pizza Tracker
           <v-spacer></v-spacer>
+        <!-- Search text-field -->
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
@@ -13,6 +14,7 @@
             single-line
             hide-details
           ></v-text-field>
+          <!-- Search text-field End-->
         </v-card-title>
         <v-data-table :headers="headers" :items="tableArrayOfList" :search="search">
           <template v-slot:item="row">
@@ -126,6 +128,8 @@ export default {
       selectedStatus: '',
       tableArrayOfList: [],
       pizzaDataIndex: '',
+
+      // *** Data Table Header List *** //
       headers: [
         {
           text: 'Customer Name',
@@ -137,8 +141,9 @@ export default {
         { text: 'Status Of The Order', value: 'status' },
         { text: 'Action', value: 'actions', sortable: false },
       ],
-      
-      desserts: [
+
+      // *** Data Table Pizza Details List *** //
+      pizzaDetailsList: [
         {
           name: 'Mohit',
           noOfOrdered: 2,
@@ -167,10 +172,11 @@ export default {
     }; 
   },
   mounted() {
+    // *** Get And Set Item List From localStorage *** //
     if (JSON.parse(localStorage.getItem('pizzaTrackerList'))) {
       this.tableArrayOfList = JSON.parse(localStorage.getItem('pizzaTrackerList'));
     } else {
-      localStorage.setItem('pizzaTrackerList', JSON.stringify(this.desserts));
+      localStorage.setItem('pizzaTrackerList', JSON.stringify(this.pizzaDetailsList));
        this.tableArrayOfList = JSON.parse(localStorage.getItem('pizzaTrackerList'));
     }
   },
@@ -181,6 +187,7 @@ export default {
     },
     onClickChangeStatus: function (item, index) {
       this.pizzaData = item;
+      this.select = item.status;
       this.changeStatusDialog = true;
       this.pizzaDataIndex = index;
     },
