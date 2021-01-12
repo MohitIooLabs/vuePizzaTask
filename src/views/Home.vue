@@ -195,9 +195,10 @@ export default {
       this.selectedStatus = item;
     },
     changeStatus: function () {
-      var array = JSON.parse(localStorage.getItem('pizzaTrackerList'));
-      array[this.pizzaDataIndex].status = this.selectedStatus;
-      localStorage.setItem('pizzaTrackerList', JSON.stringify(array));
+      // *** Update Status localStorage list ***//
+      var array = JSON.parse(localStorage.getItem('pizzaTrackerList')); // Get Data from localStorage
+      array[this.pizzaDataIndex].status = this.selectedStatus; // Set status
+      localStorage.setItem('pizzaTrackerList', JSON.stringify(array)); // Set Data in localStorage
       this.changeStatusDialog = false;
       this.tableArrayOfList = JSON.parse(localStorage.getItem('pizzaTrackerList'));
     },
